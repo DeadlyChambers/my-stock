@@ -12,7 +12,7 @@ import plotly.graph_objs as go
 
 def set_data(stockProfile):
     #Interval required 1 minute
-    stockProfile.data = yf.download(tickers=stockProfile.name, period='1d', interval='1m')
+    stockProfile.data = yf.download(tickers=stockProfile.name, period='1d', interval='15m')
     stockProfile.set_current(stockProfile.data.values.item(stockProfile.data.values.size-2))
    
 def get(stocks):
@@ -20,15 +20,15 @@ def get(stocks):
     
     #declare figure
     fig = make_subplots(
-        rows=2, cols=4,
+        rows=4, cols=3,
         subplot_titles= [stock.to_string() for stock in stocks],
-        y_title='Stock Price (USD per Shares)',
+        y_title='',
     )
     row=1
     col=1
     for stock in stocks:
         #Candlestick
-        if col == 5:
+        if col == 4:
             col=1
             row+=1
         fig.add_trace(go.Candlestick(x=stock.data.index,
@@ -41,15 +41,15 @@ def get(stocks):
     col=1
     for stock in stocks:
         #Candlestick
-        if col == 5:
+        if col == 4:
             col=1
             row+=1
         fig.update_xaxes(title_text=stock.to_string(), row=row,col=col, rangeslider_visible=False)
-        fig.update_yaxes(title_text=f"Stock Price (USD per Shares) {stock.purchased_value()}", row=row,col=col)       
+        fig.update_yaxes(title_text=f"Total Value {stock.purchased_value()}", row=row,col=col)       
         col+=1
     # Add titles
     
-    fig.update_layout(title_text="Customizing Subplot Axes", height=1400, font=dict(size=12))
+    fig.update_layout(title_text="My Stock Portfolio", height=1400, font=dict(size=12))
     # X-Axes
     # fig.update_xaxes(
     #     rangeslider_visible=True,
@@ -68,8 +68,8 @@ def get(stocks):
     fig.show()
 stocks = [ model.StockProfile("CLF", 21.50, 223), model.StockProfile("DNN", 1.05, 276.71), 
 model.StockProfile("BB", 14.93, 40), model.StockProfile("LEU", 23.75, 10), 
-model.StockProfile("LAC", 14.75, 28.06), model.StockProfile("TBPMF", .27, 2750), 
-model.StockProfile("DAL", 47.5, 19), model.StockProfile("NCLH", 99.66, 4)]
+model.StockProfile("LAC", 14.75, 28.06), model.StockProfile("TBPMF", .27, 1250), 
+model.StockProfile("DAL", 47.5, 19), model.StockProfile("NCLH", 99.66, 4), model.StockProfile("TRU", 88.63, 203.981), model.StockProfile("AVIR",33.4,11)]
 get(stocks)
 
 
