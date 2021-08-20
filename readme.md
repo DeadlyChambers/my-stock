@@ -12,3 +12,4 @@ deactivate
 
 ### Change the stocks that are in the stock_plot.py file to see your stocks
 [How to Change Text Color Maybe](https://stackoverflow.com/questions/57919281)
+[Use a different graph type](https://plotly.com/python/axes/)
