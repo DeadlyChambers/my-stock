@@ -30,12 +30,10 @@ def set_data(stock_profile):
 def get(my_stocks):
     # declare figure
     fig = make_subplots(
-        rows=math.ceil(len(my_stocks) / 3), cols=3,  # loop array
+        rows=math.floor(len(my_stocks)), cols=3,  # loop array
         # subplot_titles=[stock.to_string() for stock in stocks],
         y_title='',  # y_title_font_color=stock.color_text
     )
-
-    backgrounds = []
     for count, stock in enumerate(my_stocks, start=1):
         row = math.ceil(count / 3)
         col = count - ((row - 1) * 3)
@@ -54,7 +52,10 @@ def get(my_stocks):
                                  # close=stock.data['Close'],
                                  name=f'{stock.name}<br><span style="color:{stock.color_text}">{stock.result}</span>'),
                       row=row, col=col)
-
+    backgrounds = []
+    for count, stock in enumerate(my_stocks, start=1):
+        row = math.ceil(count / 3)
+        col = count - ((row - 1) * 3)
         # Style the X and Y axes for each individual subplot
         fig.update_xaxes(title_text=stock.to_string(), row=row, col=col, rangeslider_visible=False,
                          title_font_color=stock.color_text, title_font_size=12)

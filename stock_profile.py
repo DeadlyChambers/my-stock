@@ -39,9 +39,9 @@ class StockProfile:
             self.interval = '15m'
 
     def set_current(self, current_price):
-        self.current_price = round(current_price,2)
+        self.current_price = round(current_price, 2)
         self.net_value = current_price * self.total - self.current_value
-        self.result = round(self.net_value,2)
+        self.result = round(self.net_value, 2)
         if self.net_value > 0:
             self.color_text = 'green'
             self.color_bg = '#caffbf'
@@ -50,6 +50,7 @@ class StockProfile:
             self.color_bg = '#ffadad'
 
     def to_string(self):
-        return f"{self.name} | shares {round(self.total,2)} | avg {round(self.cost,2)} | cur {self.current_price} | net {self.result}"
+        return f"{self.name} | shares {round(self.total,2)} | avg {round(self.cost,2)} " \
+               f"| cur {self.current_price} | net {self.result}"
     
 
