@@ -1,7 +1,7 @@
 # Raw Package
 from datetime import date
 from plotly.subplots import make_subplots
-import stock_profile as model
+import plotly.io as pio
 import math
 
 # Data Source
@@ -12,7 +12,6 @@ import plotly.graph_objs as go
 
 total_assets = 0
 net_gains = 0
-interval = "monthly"
 start_date = date.today
 end_date = date.today
 
@@ -27,7 +26,7 @@ def set_data(stock_profile):
     total_assets += stock_profile.current_value
 
 
-def get(my_stocks):
+def get(my_stocks, output_file):
     # declare figure
     fig = make_subplots(
         rows=math.ceil(len(my_stocks) / 3), cols=3,  # loop array
@@ -36,6 +35,7 @@ def get(my_stocks):
     )
 
     backgrounds = []
+    interval = ''
     for count, stock in enumerate(my_stocks, start=1):
         row = math.ceil(count / 3)
         col = count - ((row - 1) * 3)
@@ -45,6 +45,7 @@ def get(my_stocks):
         # low=stock.data['Low'],
         # close=stock.data['Close'], name=stock.name), row=row, col=col)
         set_data(stock)
+        interval = stock.interval
         fig.add_trace(go.Scatter(x=stock.data.index, y=stock.data['Close'],
                                  mode='lines', connectgaps=True,
                                  line=dict(color=stock.color_text),
@@ -76,13 +77,9 @@ def get(my_stocks):
         title_text=f'<b style="font-size:20px;">My Stock Portfolio</b> - <b>Total:</b> {total_assets} | '
                    f'<b>Net:</b> {round(net_gains, 2)} - {interval} interval {start_date}  {end_date}',
         height=1400, font=dict(size=12), shapes=backgrounds)
-
-    fig.show()
-
-
-stocks = [model.StockProfile("CLF", 21.50, 223, interval), model.StockProfile("DNN", 1.05, 276, interval),
-          model.StockProfile("BB", 14.93, 40, interval), model.StockProfile("LEU", 23.75, 10, interval),
-          model.StockProfile("LAC", 14.75, 16, interval), model.StockProfile("TBPMF", .27, 1250, interval),
-          model.StockProfile("DAL", 47.5, 19, interval), model.StockProfile("NCLH", 99.66, 4, interval),
-          model.StockProfile("TRU", 88.63, 203.981, interval), model.StockProfile("AVIR", 33.4, 11, interval)]
-get(stocks)
+    if len(output_file) > 0:
+        outfile = open(output_file, "w")
+        pio.write_html(fig, file=outfile, auto_open=True)
+        outfile.close()
+    else:
+        fig.show()

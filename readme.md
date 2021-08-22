@@ -7,7 +7,9 @@ ChartDirector and then
 python -m venv ~/.venv/my-stock
 source ~/.venv/my-stock/Scripts/activate
 python -m pip install -r requirements.txt
-python stock_plot.py
+python run.py -s
+# or
+python run.py
 deactivate
 ```
 
