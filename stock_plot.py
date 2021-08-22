@@ -26,10 +26,10 @@ def set_data(stock_profile):
     total_assets += stock_profile.current_value
 
 
-def get(my_stocks, output_file):
+def get(my_stocks, output_file, columns):
     # declare figure
     fig = make_subplots(
-        rows=math.ceil(len(my_stocks) / 3), cols=3,  # loop array
+        rows=math.ceil(len(my_stocks) / columns), cols=columns,  # loop array
         # subplot_titles=[stock.to_string() for stock in stocks],
         y_title='',  # y_title_font_color=stock.color_text
     )
@@ -37,8 +37,8 @@ def get(my_stocks, output_file):
     backgrounds = []
     interval = ''
     for count, stock in enumerate(my_stocks, start=1):
-        row = math.ceil(count / 3)
-        col = count - ((row - 1) * 3)
+        row = math.ceil(count / columns)
+        col = count - ((row - 1) * columns)
         # fig.add_trace(go.Candlestick(x=stock.data.index,
         # open=stock.data['Open'],
         # high=stock.data['High'],
