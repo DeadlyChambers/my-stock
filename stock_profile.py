@@ -19,6 +19,8 @@ class StockProfile:
         self.current_value = round(self.cost * self.total,2)
         #Valid periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max
         #Valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo
+        self.interval_string = interval
+        interval = interval.lower()
         if interval == "daily":
             self.period = '1d'
             self.interval = '15m'
@@ -36,7 +38,7 @@ class StockProfile:
             self.interval = '3mo'
         else:
             self.period = '5d'
-            self.interval = '15m'
+            self.interval = '1h'
 
     def set_current(self, current_price):
         self.current_price = round(current_price, 2)

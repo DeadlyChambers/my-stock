@@ -26,7 +26,7 @@ def set_data(stock_profile):
     total_assets += stock_profile.current_value
 
 
-def get(my_stocks, output_file, columns):
+def get(my_stocks, columns):
     # declare figure
     fig = make_subplots(
         rows=math.ceil(len(my_stocks) / columns), cols=columns,  # loop array
@@ -45,7 +45,7 @@ def get(my_stocks, output_file, columns):
         # low=stock.data['Low'],
         # close=stock.data['Close'], name=stock.name), row=row, col=col)
         set_data(stock)
-        interval = stock.interval
+        interval = stock.interval_string
         fig.add_trace(go.Scatter(x=stock.data.index, y=stock.data['Close'],
                                  mode='lines', connectgaps=True,
                                  line=dict(color=stock.color_text),
@@ -60,7 +60,7 @@ def get(my_stocks, output_file, columns):
         fig.update_xaxes(title_text=stock.to_string(), row=row, col=col, rangeslider_visible=False,
                          title_font_color=stock.color_text, title_font_size=12)
         fig.update_yaxes(title_text=stock.name, row=row, col=col, title_font_color="black")
-        cur_plot = fig.data[count -1]
+        cur_plot = fig.data[count - 1]
         sd = stock.data
         global start_date, end_date
         start_date = cur_plot.x[0]
@@ -77,9 +77,4 @@ def get(my_stocks, output_file, columns):
         title_text=f'<b style="font-size:20px;">My Stock Portfolio</b> - <b>Total:</b> {total_assets} | '
                    f'<b>Net:</b> {round(net_gains, 2)} - {interval} interval {start_date}  {end_date}',
         height=1400, font=dict(size=12), shapes=backgrounds)
-    if len(output_file) > 0:
-        outfile = open(output_file, "w")
-        pio.write_html(fig, file=outfile, auto_open=True)
-        outfile.close()
-    else:
-        fig.show()
+    return pio.to_html(fig)
