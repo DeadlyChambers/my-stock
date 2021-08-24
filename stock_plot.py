@@ -53,7 +53,7 @@ def get(my_stocks, columns):
                                  # high=stock.data['High'],
                                  # low=stock.data['Low'],
                                  # close=stock.data['Close'],
-                                 name=f'{stock.name}<br><span style="color:{stock.color_text}">{stock.result}</span>'),
+                                 name=f'{stock.name}<br><span style="color:{stock.color_text}">{stock.net_value}</span>'),
                       row=row, col=col)
 
         # Style the X and Y axes for each individual subplot
