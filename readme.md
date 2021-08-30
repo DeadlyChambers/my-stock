@@ -55,7 +55,7 @@ cd /var/www
 git clone https://github.com/DeadlyChambers/my-stock.git /var/www
 mkdir /venv
 python3 -m venv venv
-source venv/bin/activate
+source /var/www/venv/bin/activate
 pip install -r requirements.flask.txt
 export FLASK_APP=flask_function
 flask run -p 5050
