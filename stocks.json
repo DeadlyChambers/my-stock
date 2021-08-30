@@ -7,7 +7,7 @@
     {"name":"LAC", "cost":14.75, "total":16},
     {"name":"TBPMF", "cost":0.27, "total":1250},
     {"name":"DAL", "cost":47.5, "total":19},
-    {"name":"NCLH", "cost":99.66, "total":4},
+    {"name":"NCLH", "cost":24.92, "total":4},
     {"name":"TRU", "cost":88.63, "total":204},
     {"name":"AVIR", "cost":33.4, "total":11}]
 }
