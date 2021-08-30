@@ -1,11 +1,12 @@
 import stock_plot as plot
 import stock_profile as sp
 import json
+from flask_cors import CORS
 from flask import Flask, request, make_response
 
 
 app = Flask(__name__)
-
+CORS(app) #Prevents CORS errors 
 
 @app.route('/', methods=('GET',))
 def get_handler():

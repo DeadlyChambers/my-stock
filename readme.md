@@ -48,6 +48,20 @@ Use flask_function.py file
 TODO: Complete Soinshane.API to communicate with this endpoint in 
 AWS.
 
+## Soinshsnae
+```
+mkdir /var/www
+cd /var/www
+git clone https://github.com/DeadlyChambers/my-stock.git /var/www
+mkdir /venv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.flask.txt
+export FLASK_APP=flask_function
+flask run -p 5050
+
+```
+
 ### Change the stocks that are in the stock_plot.py file to see your stocks
 [How to Change Text Color Maybe](https://stackoverflow.com/questions/57919281)
 [Use a different graph type](https://plotly.com/python/axes/)
